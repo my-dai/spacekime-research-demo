@@ -1,11 +1,9 @@
 # SpaceKime Research Workbench
 
-A reproducible Python research workbench based on my University of Michigan
-SOCR work with complex fMRI signals, time-phase models, and SpaceKime-inspired
-reconstruction.
-
-The repository now includes the numerical modules, experiment runners, and
-tests behind the project rather than only a small showcase. It covers:
+A reproducible Python research workbench from my University of Michigan SOCR
+work on complex fMRI signals, time-phase models, sampling, and reconstruction.
+It includes the numerical modules, experiment runners, and tests I used to
+study:
 
 - complex-valued fMRI loading and phase-distribution analysis;
 - synthetic 4D time-phase surfaces and repeated-measurement simulation;
@@ -60,10 +58,11 @@ python run_real_bigim_demo.py
 
 The synthetic experiments and complete test suite do not require the real data.
 
-## Scope
+## Interpretation
 
-This is a research and engineering workbench, not an official implementation of
-the SpaceKime or Kime-Phase Tomography optimizer. The repository makes that
-boundary explicit so observed phase summaries are not presented as latent
-reconstructions without the required repeated-measurement assumptions.
+Observed phase summaries and latent reconstructions are kept separate in the
+code and reports. Reconstruction claims require repeated-measurement assumptions
+or explicit constraints; the rank and non-identifiability tools make those
+conditions visible. This repository is research code and is not the official
+SpaceKime or Kime-Phase Tomography implementation.
 
