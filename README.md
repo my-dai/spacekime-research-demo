@@ -1,5 +1,7 @@
 # SpaceKime Research Workbench
 
+[![Test](https://github.com/my-dai/spacekime-research-demo/actions/workflows/test.yml/badge.svg)](https://github.com/my-dai/spacekime-research-demo/actions/workflows/test.yml)
+
 A reproducible Python research workbench from my University of Michigan SOCR
 work on complex fMRI signals, time-phase models, sampling, and reconstruction.
 It includes the numerical modules, experiment runners, and tests I used to
