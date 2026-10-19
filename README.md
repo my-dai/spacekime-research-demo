@@ -1,46 +1,69 @@
-# SpaceKime Research Demo
+# SpaceKime Research Workbench
 
-This repository is a compact, synthetic-data portfolio snapshot of work I completed for a University of Michigan SOCR research project. It explores identifiability, sampling design, reconstruction, uncertainty, and evaluation for time-phase models inspired by SpaceKime and Kime-Phase Tomography.
+A reproducible Python research workbench based on my University of Michigan
+SOCR work with complex fMRI signals, time-phase models, and SpaceKime-inspired
+reconstruction.
 
-The public demo focuses on the parts that can be reproduced without private research data:
+The repository now includes the numerical modules, experiment runners, and
+tests behind the project rather than only a small showcase. It covers:
 
-- finite Fourier models for latent phase distributions;
-- synthetic measurement and sampling operators;
-- rank, null-space, conditioning, and noise-sensitivity analysis;
-- phase-reparameterization counterexamples that expose non-identifiability;
-- recovery when calibration assumptions are available;
-- observable-law comparisons using Wasserstein distance and MMD;
-- JSON and figure outputs for repeatable evaluation.
+- complex-valued fMRI loading and phase-distribution analysis;
+- synthetic 4D time-phase surfaces and repeated-measurement simulation;
+- uniform and nonuniform sampling experiments;
+- density-corrected and joint time-phase reconstruction;
+- rank, null-space, conditioning, and non-identifiability analysis;
+- calibrated recovery, bootstrap uncertainty, and split-conformal evaluation;
+- rotation/reflection-aware comparisons and sparse phase-anchor experiments;
+- PSNR, SSIM, Wasserstein distance, MMD, and reproducible JSON/CSV reporting.
 
-The repository does **not** contain participant data, private fMRI files, or claim to reproduce an official SpaceKime optimizer. It is a focused engineering and numerical-research demonstration.
-
-## Run the showcase
+## Quick start
 
 ```bash
 python -m venv .venv
 # Windows: .venv\Scripts\activate
 # macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 python run_research_showcase.py --output-dir output/research_showcase
-```
-
-The command writes a machine-readable summary and, when Matplotlib is available, a figure comparing the synthetic measurement and recovery cases.
-
-## Test
-
-```bash
 python -m pytest -q
 ```
 
-## Repository map
+The full test suite currently contains 74 passing tests plus 4 parameterized
+subtests.
 
-- `run_research_showcase.py` — end-to-end synthetic experiment and report.
-- `spacekime_identifiability.py` — measurement operators, diagnostics, counterexamples, and calibrated recovery.
-- `spacekime_quotient.py` — invariant observable summaries and distribution comparisons.
-- `spacekime_paths.py` — portable output-path helpers.
-- `tests/` — synthetic regression tests.
+## Main modules
 
-## Skills demonstrated
+| Module | Purpose |
+| --- | --- |
+| `spacekime_core.py` | Complex signal metrics, phase noise, and phase-distribution surfaces |
+| `spacekime_synthetic.py` | Known latent surfaces, sampling, reconstruction, PSNR, and SSIM |
+| `spacekime_advanced.py` | Joint time-phase estimation, density correction, stitching, and uncertainty |
+| `spacekime_analytic.py` | Complex Laplace-domain models and TCIU conformance checks |
+| `spacekime_blind.py` | Observation-only latent-phase baselines and symmetry-aware evaluation |
+| `spacekime_phase_dynamics.py` | Time-varying phase models and sparse-anchor recovery |
+| `spacekime_identifiability.py` | Finite-basis measurement operators, rank diagnostics, and constrained recovery |
+| `spacekime_quotient.py` | Gauge-invariant summaries, Wasserstein distance, and permutation MMD |
 
-Python, NumPy, SciPy, numerical simulation, sampling design, inverse-problem diagnostics, statistical distance metrics, reproducible experiment reporting, and technical visualization.
+The `run_*.py` files expose the benchmark and audit workflows. `tests/` covers
+the numerical primitives, sampling assumptions, recovery behavior, reporting,
+and data-loading boundaries.
+
+## Optional public fMRI data
+
+The real-data path expects a MATLAB file containing a complex `bigim` array.
+The code deliberately does not bundle participant data. A compatible public
+SOCR data source can be supplied with:
+
+```bash
+set SPACEKIME_MAT_FILE=C:\path\to\subj1_run1_complex_all.mat
+python run_real_bigim_demo.py
+```
+
+The synthetic experiments and complete test suite do not require the real data.
+
+## Scope
+
+This is a research and engineering workbench, not an official implementation of
+the SpaceKime or Kime-Phase Tomography optimizer. The repository makes that
+boundary explicit so observed phase summaries are not presented as latent
+reconstructions without the required repeated-measurement assumptions.
 
